@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasmin's Blog - Engineering, Psychology & Human Behavior</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fff;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Editorial Magazine Design */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            border-top: 8px solid #000;
+            border-bottom: 8px solid #000;
+            padding: 3rem 0;
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 0.9;
+            font-style: italic;
+            color: #000;
+            font-family: Georgia, serif;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            font-family: Georgia, serif;
+        }
+
+        .author-info {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .author-info a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+        }
+
+        .author-info a:hover {
+            border-bottom: 2px solid #000;
+        }
+
+        .blog-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .blog-item {
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        /* Featured Article - Takes full width */
+        .blog-item.featured {
+            grid-column: 1 / 13;
+            border-bottom: 3px solid #000;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid layout for other articles */
+        .blog-item:nth-child(2) {
+            grid-column: 1 / 7;
+        }
+
+        .blog-item:nth-child(3) {
+            grid-column: 7 / 13;
+        }
+
+        .blog-item:nth-child(4) {
+            grid-column: 1 / 6;
+        }
+
+        .blog-item:nth-child(5) {
+            grid-column: 6 / 13;
+        }
+
+        .blog-date {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #999;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .blog-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-family: Georgia, serif;
+            font-style: italic;
+        }
+
+        .blog-item.featured .blog-title {
+            font-size: 3rem;
+        }
+
+        .blog-title a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .blog-title a:hover {
+            border-bottom: 3px solid #000;
+        }
+
+        .blog-excerpt {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            font-family: Georgia, serif;
+            margin-bottom: 1rem;
+        }
+
+        .blog-item.featured .blog-excerpt {
+            font-size: 1.2rem;
+            max-width: 70%;
+        }
+
+        .blog-category {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.8rem;
+            margin-bottom: 1rem;
+            border: 2px solid #000;
+            background: #fff;
+            color: #000;
+        }
+
+        .category-engineering {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .category-psychology {
+            border-color: #4ecdc4;
+            color: #4ecdc4;
+        }
+
+        .category-experiments {
+            border-color: #45b7d1;
+            color: #45b7d1;
+        }
+
+        .category-rocketry {
+            border-color: #f9ca24;
+            color: #f9ca24;
+        }
+
+        .read-more {
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #000;
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-bottom: none;
+        }
+
+        /* Stats Section */
+        .stats {
+            border-top: 3px solid #000;
+            border-bottom: 3px solid #000;
+            padding: 2rem 0;
+            margin: 4rem 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            font-family: Georgia, serif;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            font-style: italic;
+            color: #000;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            font-family: Georgia, serif;
+            font-style: italic;
+            color: #666;
+            border-top: 1px solid #eee;
+            margin-top: 4rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            header {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .blog-item {
+                grid-column: 1 / 13 !important;
+            }
+
+            .blog-title {
+                font-size: 1.8rem;
+            }
+
+            .blog-item.featured .blog-title {
+                font-size: 2.2rem;
+            }
+
+            .blog-item.featured .blog-excerpt {
+                max-width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Hover effects */
+        .blog-item:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .blog-item {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .blog-item:nth-child(1) { animation-delay: 0.1s; }
+        .blog-item:nth-child(2) { animation-delay: 0.2s; }
+        .blog-item:nth-child(3) { animation-delay: 0.3s; }
+        .blog-item:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>WRITINGS</h1>
+                <div class="author-info">
+                    By <a href="https://www.linkedin.com/in/yasmin-qureshi-9603a8289/" target="_blank">Yasmin Qureshi</a>
+                </div>
+            </div>
+            <!-- <div class="subtitle">
+                A curated collection of explorations into engineering, psychology, and human behavior. 
+                From rockets that scream through the sky to mice that teach us about society, 
+                from the clothes that shape our minds to the computers that control our flights. 
+                Published with curiosity and care.
+            </div> -->
+        </header>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">4</span>
+                <div class="stat-label">Articles</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <div class="stat-label">Topics</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">∞</span>
+                <div class="stat-label">Curiosity</div>
+            </div>
+        </div>
+
+        <ul class="blog-list">
+            <li class="blog-item featured">
+                <div class="blog-category category-experiments">Behavioral Science</div>
+                <div class="blog-date">Updated 2 months ago</div>
+                <h2 class="blog-title">
+                    <a href="https://yasmin.gitbook.io/when-mouse-utopia-turned-into-mouse-apocalypse/" target="_blank">
+                        Universe 25: When Mouse Utopia Turned into Mouse Apocalypse
+                    </a>
+                </h2>
+                <p class="blog-excerpt">
+                    Once again, I stumbled on something fascinating (and a little unsettling) — the Universe 25 experiment. Conducted by John B. Calhoun back in the 1960s–70s, it started off as the dream life for mice: unlimited food, water, nesting material, no predators, no diseases. Basically, the mouse version of heaven.
+<br/>
+<br/>
+                    But spoiler alert: it ended in total collapse. Yep, utopia turned dystopia real quick.
+                </p>
+                <a href="https://yasmin.gitbook.io/when-mouse-utopia-turned-into-mouse-apocalypse/" target="_blank" class="read-more">Read</a>
+            </li>
+
+            <li class="blog-item">
+                <div class="blog-category category-psychology">Cognitive Science</div>
+                <div class="blog-date">Updated 3 months ago</div>
+                <h3 class="blog-title">
+                    <a href="https://yasmin.gitbook.io/dressing-the-mind/" target="_blank">
+                        Dressing the Mind
+                    </a>
+                </h3>
+                <p class="blog-excerpt">
+                   A curious realization struck me over the past few days: the way I dress seems to change not only how others perceive me, but also how I carry myself, how productive I am, and even whether I feel motivated to step outside my house. For instance, when I wear a professional outfit — a shirt, trousers, and a tie — I notice an immediate shift in my posture, my speech, and my overall caution in behavior. Even outside professional settings, I continue to embody that “formal” mindset. In contrast, during a recent two-day holiday at home, I stayed in loose, comfortable clothes, skipped dressing properly, and even avoided showering. The result? I spent most of the time lying down, scrolling on my phone, with zero productivity and no inclination to go out. This raised a personal question: Do my clothes truly affect my mood and productivity, or am I simply imagining this connection?
+
+                </p>
+                <a href="https://yasmin.gitbook.io/dressing-the-mind/" target="_blank" class="read-more">Read</a>
+            </li>
+
+            <li class="blog-item">
+                <div class="blog-category category-engineering">Embedded Systems</div>
+                <div class="blog-date">Updated 7 months ago</div>
+                <h3 class="blog-title">
+                    <a href="https://yasmin.gitbook.io/grace/" target="_blank">
+                        GRACE: Two-Stage FC
+                    </a>
+                </h3>
+                <p class="blog-excerpt">
+                    After wrapping up our first ever flight computer, we officially became part of our college's rocketry team. A month later, we had that meeting. You know, the one with the chaotic "WHAT’S NEXT?" vibe. It was less of a meeting and more of a parliament debate.
+
+Some of us wanted to dive into liquid propulsion (ambitious, I know), others were hyped about boosters. But given our resource constraints, we all found common ground on one thing—let’s go for a two-stage rocket.
+
+And because being realistic is boring sometimes, we didn't settle at 1 km or 3 km. Nah—we shot for 8 km. Why? Because we were high on dreams (and maybe caffeine).
+
+So, we began our research and designed our test rocket, lovingly named "Venessa." A two-stage beauty. But this time, she wasn't just pretty—she was smart. Two brains smart: "GRACE" and "NERVE"—redundant flight computers because we did learn from our first crash-and-burn attempt.
+
+This blog is about my GRACE—because this one’s close to heart.                </p>
+                <a href="https://yasmin.gitbook.io/grace/" target="_blank" class="read-more">Read</a>
+            </li>
+
+            <li class="blog-item">
+                <div class="blog-category category-engineering">Embedded Systems</div>
+                <div class="blog-date">Updated 7 months ago</div>
+                <h3 class="blog-title">
+                    <a href="https://yasmin.gitbook.io/first_fc/" target="_blank">
+                        My First Flight Computer
+                    </a>
+                </h3>
+                <p class="blog-excerpt">
+                  One year ago, when I applied to join my college’s rocketry team, we were handed a challenge that felt like being thrown into deep water with floaties still in the packaging:
+
+“Form your own team and build a fully functional model rocket. You’ll figure it out.”
+
+So I did. I was responsible for developing the avionics system — the brain of the rocket that decides what happens, when. With no prior hands-on experience in aerospace systems and just enough knowledge of microcontrollers to feel dangerous, I dove headfirst into the unknown.
+
+This is the story of how I designed, built, and launched my first Flight Computer (FC) — what worked, what broke (literally), and what it taught me about engineering, failure, and curiosity.                </p>
+                <a href="https://yasmin.gitbook.io/first_fc/" target="_blank" class="read-more">Read</a>
+            </li>
+        </ul>
+
+        <div class="footer">
+            "I write only because there is a voice within me that will not be still."<br>
+            — Sylvia Plath
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and enhanced interactions
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add a subtle feedback effect
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add reading time estimation
+        document.querySelectorAll('.blog-item').forEach(item => {
+            const excerpt = item.querySelector('.blog-excerpt');
+            if (excerpt) {
+                const words = excerpt.textContent.split(' ').length;
+                const readingTime = Math.ceil(words / 200); // Average reading speed
+                
+                const readMore = item.querySelector('.read-more');
+                if (readMore && readingTime > 1) {
+                    readMore.innerHTML += ` • ${readingTime} min read`;
+                }
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.blog-item').forEach(item => {
+            item.style.animationPlayState = 'paused';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
